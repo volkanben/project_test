@@ -1,0 +1,73 @@
+<div class="container">
+    <% sorularCevaplar.forEach((soru, index) => { %>
+    <div class="main-content">
+        <div class="board">
+            <form method="post" class="form">
+            <div class="question">
+                <span id="s-question"><%= soru.soru %></span>
+            </div>
+            <div id="board-<%= index %>" class="answers-class">
+                <div class="ans-1">
+                    <div class="answer-question">
+                        <span><a style="color:rgb(55, 54, 54);text-decoration:none;font-size: 19px;" class="aTag">
+                            <span><%= soru.secenek1 %></span>
+                        </a></span>
+                    </div>
+                    <div class="answer-radio-1">
+                        <input type="radio" id="a-1-<%= index %>" name="a-<%= index %>" value="1">
+                        <label class="ans-low-1-def" for="a-1-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-2-<%= index %>" name="a-<%= index %>" value="2">
+                        <label class="ans-low-2-def" for="a-2-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-3-<%= index %>" name="a-<%= index %>" value="3">
+                        <label class="ans-low-3-def" for="a-3-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-4-<%= index %>" name="a-<%= index %>" value="4">
+                        <label class="ans-mid-def" for="a-4-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-5-<%= index %>" name="a-<%= index %>" value="5">
+                        <label class="ans-high-1-def" for="a-5-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-6-<%= index %>" name="a-<%= index %>" value="6">
+                        <label class="ans-high-2-def" for="a-6-<%= index %>"></label>
+                    
+                        <input type="radio" id="a-7-<%= index %>" name="a-<%= index %>" value="7">
+                        <label class="ans-high-3-def" for="a-7-<%= index %>"></label>
+                    </div>
+                </div>
+                <div class="ans-2">
+                    <div class="answer-question">
+                        <span><a class="bTag" style="color:rgb(55, 54, 54);text-decoration:none;font-size:19px;">
+                            <span><%= soru.secenek2 %></span>
+                        </a></span>
+                    </div>
+                    <div class="answer-radio-2">
+                        <input type="radio" id="b-1-<%= index %>" name="b-<%= index %>" value="1">
+                        <label class="ans-low-1-def" for="b-1-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-2-<%= index %>" name="b-<%= index %>" value="2">
+                        <label class="ans-low-2-def" for="b-2-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-3-<%= index %>" name="b-<%= index %>" value="3">
+                        <label class="ans-low-3-def" for="b-3-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-4-<%= index %>" name="b-<%= index %>" value="4">
+                        <label class="ans-mid-def" for="b-4-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-5-<%= index %>" name="b-<%= index %>" value="5">
+                        <label class="ans-high-1-def" for="b-5-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-6-<%= index %>" name="b-<%= index %>" value="6">
+                        <label class="ans-high-2-def" for="b-6-<%= index %>"></label>
+                    
+                        <input type="radio" id="b-7-<%= index %>" name="b-<%= index %>" value="7">
+                        <label class="ans-high-3-def" for="b-7-<%= index %>"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    <% }); %>
+</div>

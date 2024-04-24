@@ -1,0 +1,202 @@
+
+.main-content {
+    margin: 0 auto; /* Yatayda tam ortalar */
+    height: 350px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Dikeyde ortalar */
+    align-items: center; /* Yatayda ortalar */
+  }
+  
+  .board {
+    width: 100%;
+    max-width: 1000px; /* İçeriği sınırla */  
+  }
+  
+  .question {
+   
+    padding-bottom: 60px;
+    width: 100%;
+    text-align: center; /* İçeriği yatayda ortala */
+  }
+  
+ 
+  .answer-question{
+    display:flex;
+    justify-content:center;
+  }
+  .answers-class-y {
+    display: flex;
+    justify-content: center; /* Elemanları yatayda tam ortalar */
+    align-items: center; /* Elemanları dikeyde tam ortalar */
+    gap: 20%;
+    width: 100%;
+  }
+  #s-question{
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 25.2px;
+    color:#576071;  
+    font-weight:550;  
+    margin: 0 auto;  
+    width:100%;      
+  }
+  .answer-radio-1,
+  .answer-radio-2{
+  visibility: hidden;
+  align-items:center;
+  justify-content:center;
+  }
+  input[type="radio"]{
+  display:none;
+  }
+  label {
+      display: inline-block;
+      margin-right: 12px; /* Butonlar arasındaki boşluk */
+      margin-top: 20px;
+      padding: 15px 15px; /* Buton boyutu ve içeriğin sağ ve solunda boşluk */
+      border-radius: 20px; /* Kenar yuvarlama */
+      cursor: pointer; /* Fare imleci değiştirme */
+      
+    }
+    
+    
+    /* Tık işareti eklemek için ::before seçicisini kullanıyoruz */
+  
+  
+  .ans-low-1-def{
+  border: 4px solid rgba(190,165,226,0.5) ;
+  }
+  
+  .ans-low-2-def{
+  border: 4px solid rgba(217,202,238,0.5); /* 1 piksel kalınlığında, %50 opaklıkta kırmızı border */
+  }
+  .ans-low-3-def{
+  border: 4px solid rgba(230,220,244,0.5);
+  }
+  
+  .ans-mid-def{
+  border:4px solid rgba(235,227,246,1.00);
+  }
+  
+  .ans-high-1-def{
+  border : 4px solid rgba(137,255,168,0.5);
+  }
+  
+  .ans-high-2-def{
+  border : 4px solid rgba(102,255,142,0.5);
+  }
+  
+  .ans-high-3-def{
+  border : 4px solid rgba(66,255,116,0.5);
+  }
+  
+  .ans-low-1-def:hover{
+  border: 4px solid rgb(190,165,226) ;
+  background-color:#bea5e2;
+  }
+  .ans-low-2-def:hover{
+    border: 4px solid rgba(217,202,238,1.00);
+    background-color:#d9caee;
+  }
+  .ans-low-3-def:hover{
+    border:4px solid rgba(230,220,244,1.00);
+    background-color:#e6dcf4;
+  }
+  .ans-mid-def:hover{
+    border:4px solid rgba(235,227,246,1.00);
+    background-color:#ebe3f6;
+  }
+  .ans-high-1-def:hover{
+    border : 4px solid rgba(137,255,168,0.5);
+    background-color:#89ffa8;
+  }
+  .ans-high-2-def:hover{
+    border : 4px solid rgba(102,255,142,0.5);
+    background-color:#66ff8e;
+  }
+  .ans-high-3-def:hover{
+    border : 4px solid rgba(66,255,116,0.5);
+    background-color:#42ff74;
+  }
+  
+  
+    
+  .ans-low-1,
+  .ans-low-2,
+  .ans-low-3,
+  .ans-mid,
+  .ans-high-1,
+  .ans-high-2,
+  .ans-high-3{
+      position: relative; /* Önemli! ::before veya ::after için konumlandırma yapmak için gerekli */
+      background-image: url('/images/icons8-check-24.png'); /* Kullanmak istediğiniz ikonun yolunu belirtin */
+      background-repeat: no-repeat; /* Arkaplan tekrarını engelle */
+      background-position:center; /* İkonu butonun sol ortasında konumlan /* İkonun buton içindeki konumu ayarlamak için sol padding */
+    }
+  
+  
+  
+  input[type="radio"]:checked + label.ans-low-1-def,
+  input[type="radio"]:checked + label.ans-low-2-def,
+  input[type="radio"]:checked + label.ans-low-3-def,
+  input[type="radio"]:checked + label.ans-mid-def,
+  input[type="radio"]:checked + label.ans-high-1-def,
+  input[type="radio"]:checked + label.ans-high-2-def,
+  input[type="radio"]:checked + label.ans-high-3-def {
+    position: relative;
+    background-image: url('/images/icons8-check-24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  input[type="radio"]:checked + label.ans-low-1-def {
+    border: 4px solid rgb(190,165,226);
+    background-color: #bea5e2;
+  }
+  
+  input[type="radio"]:checked + label.ans-low-2-def {
+    border: 4px solid rgba(217,202,238,1.00);
+    background-color: #d9caee;
+  }
+  
+  input[type="radio"]:checked + label.ans-low-3-def {
+    border: 4px solid rgba(230,220,244,1.00);
+    background-color: #e6dcf4;
+  }
+  
+  input[type="radio"]:checked + label.ans-mid-def {
+    border: 4px solid rgba(235,227,246,1.00);
+    background-color: #ebe3f6;
+  }
+  
+  input[type="radio"]:checked + label.ans-high-1-def {
+    border: 4px solid rgba(137,255,168,0.5);
+    background-color: #89ffa8;
+  }
+  
+  input[type="radio"]:checked + label.ans-high-2-def {
+    border: 4px solid rgba(102,255,142,0.5);
+    background-color: #66ff8e;
+  }
+  
+  input[type="radio"]:checked + label.ans-high-3-def {
+    border: 4px solid rgba(66,255,116,0.5);
+    background-color: #42ff74;
+  }
+  
+  hr {
+    
+    border: none;
+    border-top: 1px solid #DDDFE2;
+    width:90%;
+    display:flex; 
+  }
+  
+  
+  
+  
+  
+  
+  
+  
