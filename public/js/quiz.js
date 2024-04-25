@@ -18,28 +18,44 @@ document.addEventListener("DOMContentLoaded", function() {
             hideDiv.style.visibility = "visible"; 
             gizliDiv1.style.visibility = "hidden";
            
-        });
-
+        })
+        
              // Tüm radio butonlarını seç
-             const radioButonlar = board.querySelectorAll('input[type="radio"]');
-             // Her radio butonuna tıklandığında
+             const radioButonlar = document.querySelectorAll('input[type="radio"]');
+
+             // Her bir radyo düğmesi için
              radioButonlar.forEach(function(radio) {
                  radio.addEventListener('change', function() {
-                     // İlgili radio butonunun index değerini al
-                     var index = radio.getAttribute('name').split('-').pop(); // "a-1-<%= index %>" -> index
-             
-                     // Diğer formun id'sini al
-                     var otherFormId = '#board-' + (parseInt(index));
-             
-                     // Diğer formu seç
-                     var otherform = document.querySelector(otherFormId);
-             
-                     // Diğer formu görüntüle
-                     if (otherform) {
-                         otherform.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                     // Radyo düğmesinin adından indeks değerini al
+                     var index = radio.getAttribute('name').split('-').pop();
+                     
+                     // a ve b radyo düğmelerinin toplamı sekize eşit veya daha azsa
+                     var aRadioButtonName = 'a-' + index;
+                     var bRadioButtonName = 'b-' + index;
+                     var aRadioButton = document.querySelector('input[name="' + aRadioButtonName + '"]:checked');
+                     var bRadioButton = document.querySelector('input[name="' + bRadioButtonName + '"]:checked');
+                     
+                     if (aRadioButton && bRadioButton) {
+                         var aRadioButtonValue = parseInt(aRadioButton.value);
+                         var bRadioButtonValue = parseInt(bRadioButton.value);
+                         
+                         if (aRadioButtonValue + bRadioButtonValue <= 8) {
+                             // Bir sonraki forma kaydır
+                             var nextFormIndex = parseInt(index);
+                             var nextFormId = '#form' + nextFormIndex;
+                             var nextForm = document.querySelector(nextFormId);
+                             if (nextForm) {
+                                 nextForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                             }
+                         }
+                         else{
+                            window.alert("Çift cevaplı soruların değerleri toplamı maximum 8 olmalıdır");
+                            bRadioButton.checked=false;
+                        }
                      }
                  });
              });
+             
              
 
         
