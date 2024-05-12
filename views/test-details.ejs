@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <div align="center">
+        <table border="1" align="center">
+            <thead>
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Tel</th>
+                    <th>E Mail</th>
+                    <th>Branş</th>
+                    <th>Adres</th>
+                    <th>Cinsiyet</th>
+                    <th>Yaş</th>
+                    <th>Test Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= aday_info.Ad_Soyad %></td>
+                    <td><%= aday_info.tel %></td>
+                    <td><%= aday_info.email %></td>
+                    <td><%= aday_info.brans_txt %></td>
+                    <td><%= aday_info.adres %></td>
+                    <td><%= aday_info.cinsiyet %></td>
+                    <td><%= aday_info.dogum_tarihi %></td>
+                    <td><%= aday_info.tarih.toLocaleDateString('tr-TR') %></td>
+
+                </tr>
+            </tbody>
+        </table>
+        
+    
+     
+</body>
+</html>

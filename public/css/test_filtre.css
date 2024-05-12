@@ -1,0 +1,34 @@
+/* Dropdown butonunun stilleri */
+.dropbtn {
+  background-color: #ffff;
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-right:20px;
+}
+
+/* Dropdown içeriğinin stilleri */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Dropdown içeriğinin stilleri (a elementleri) */
+.dropdown-content a {
+  color: black;
+  padding:  3px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Dropdown içeriğinin stilleri (a elementleri üzerine gelindiğinde) */
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+/* Dropdown içeriğinin görünür olması için (açılır menü) */
+.dropdown:hover .dropdown-content {display:block;}

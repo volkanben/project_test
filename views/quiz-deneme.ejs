@@ -26,26 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section id="Navbar">
-        <div class="container">
-            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
-                    <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
-                  </svg>
-                <span class="fs-4 title1">MİRROR</span>
-              </a>
-        
-              <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link active">Anasayfa</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Özellikler</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Hakkımızda</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">İletişim</a></li>
-              </ul>
-            </header>
-          </div>
-    </section>
-    <div class="progress-bar">
+   <div class="progress-bar">
         <div class="time">
             01:20
         </div>
@@ -60,7 +41,10 @@
             </svg>
            </div>
         <div class="title-desc">
-            <span>Merhaba Volkan</span>
+            <span>Merhaba <%= name %></span>
+            <input name="kullanici_id" type="hidden" value="<%= kullanici_id %>">
+
+            
         </div>
         <div class="desc" id="first-desc">
             <div>
@@ -79,9 +63,7 @@
             </div>
         </div>
         </div>
-        <div class="wavy-cont">
-
-        </div>
+       
     <div class="main-class">
         <div class="container">
             <% sorularCevaplar.forEach((soru, index) => { %>
@@ -89,7 +71,7 @@
                 
             <div class="main-content">
                 <div class="board">
-                    <form method="post" id="form<%= index %>" class="form">
+                    <form method="post" name="<%= kullanici_id %>" id="form<%= index %>" class="form">
                     <div class="question">
                         <span id="s-question"><%= soru.soru %></span>
                     </div>
@@ -98,7 +80,8 @@
                             <div class="answer-question">
                                 <span><a style="color:rgb(55, 54, 54);text-decoration:none;font-size: 19px;" class="aTag">
                                     <span><%= soru.secenek1 %></span>
-                                </a></span>
+                                      </a>
+                                </span>
                             </div>
                             <div class="answer-radio-1">
                                 <input type="radio" id="a-1-<%= index %>" name="a-<%= index %>" value="1">
@@ -124,7 +107,7 @@
                             </div>
                         </div>
                         <div class="ans-2">
-                            <div class="answer-question">
+                            <div class="answer-question-1">
                                 <span><a class="bTag" style="color:rgb(55, 54, 54);text-decoration:none;font-size:19px;">
                                     <span><%= soru.secenek2 %></span>
                                 </a></span>
@@ -162,14 +145,14 @@
             <% evet_hayir.forEach((ques,index)=> { %>
                 <div class="main-content">
                     <div class="board">
-                        <form method="post" id="form<%= index %>" class="form2">
+                        <form method="post" id="form2<%= index %>" class="form2">
                             <div class="question">
                                 <span id="s-question"><%=ques.bsoru%></span>
                             </div>
                             <div class="answers-class-y">
                                 <div id="ans-1" class="special-radio1">
                                     <input type="radio" id="y-<%= index %>" name="e-<%= index %>" value="Evet">
-                                    <label class="label-no" for="y-<%= index %>">Evet</label>
+                                    <label class="label-yes" for="y-<%= index %>">Evet</label>
                                 </div>
                                 <div id="ans-2" class="special-radio2">
                                     <input type="radio" id="n-<%= index %>" name="e-<%= index %>" value="Hayır">
@@ -182,7 +165,7 @@
                 <hr>
             <% }) %>
             
-            <button id="gonder-butonu" >gonder</button>
+            <button id="gonder-butonu" onclick="Kaydet()" >Kaydet</button>
           <script src="/js/quiz-post.js" type="text/javascript"></script> 
         </div>
     </div>

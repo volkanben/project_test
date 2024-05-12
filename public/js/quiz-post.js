@@ -21,6 +21,7 @@ document.getElementById('gonder-butonu').addEventListener('click', function() {
 
         // Form içindeki tüm input elemanlarını seç
         var inputs = form.querySelectorAll('input');
+    
 
         // Her bir input elemanını döngüye alarak işlem yap
         inputs.forEach(function(input) {
@@ -52,15 +53,11 @@ document.getElementById('gonder-butonu').addEventListener('click', function() {
         formDataArray.push(formData_eh);
     });
     
-        // Form içindeki tüm input elemanlarını seç
-       
+    var hiddenInput = document.querySelector('input[name="kullanici_id"]');
+    var kullanici_id_info = {};
+     kullanici_id_info[hiddenInput.name]=hiddenInput.value;
 
-        // Her bir input elemanını döngüye alarak işlem yap
-       
-
-        // Diğer formun verilerini ana diziye ekle
-        
-   
+     formDataArray.push(kullanici_id_info);
 
     // AJAX ile sunucuya form verilerini gönderme
     var xhr = new XMLHttpRequest();
@@ -70,6 +67,7 @@ document.getElementById('gonder-butonu').addEventListener('click', function() {
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log('Form verileri sunucuya başarıyla gönderildi:');
             console.log(formDataArray); // Tüm form verilerini konsola yazdır
+            
         } else {
             console.error('Form verileri sunucuya gönderilirken bir hata oluştu.');
         }

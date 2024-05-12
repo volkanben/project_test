@@ -3,25 +3,39 @@ document.addEventListener("DOMContentLoaded", function() {
     var boards = document.querySelectorAll('.board');
 
     boards.forEach(function(board) {
+        
+
         var ans1 = board.querySelector(".ans-1");
+        var ans2 = board.querySelector(".ans-2");
+
+        
         var gizliDiv1 = board.querySelector(".answer-radio-1");
         var hideDiv = board.querySelector(".answer-radio-2");
-
-        ans1.addEventListener("click", function() {
-            gizliDiv1.style.visibility = "visible";
-            hideDiv.style.visibility = "hidden";
-           
-        });
-
-        var ans2 = board.querySelector(".ans-2");
-        ans2.addEventListener("click", function() {
-            hideDiv.style.visibility = "visible"; 
-            gizliDiv1.style.visibility = "hidden";
-           
-        })
         
+        // ans1 ve ans2 null olmadığından emin olun
+        
+            // Event listener'ları ekle
+            ans1.addEventListener("click", function() {
+                gizliDiv1.style.visibility = "visible";
+                hideDiv.style.visibility = "hidden";
+            });
+        
+            ans2.addEventListener("click", function() {
+                hideDiv.style.visibility = "visible"; 
+                gizliDiv1.style.visibility = "hidden";
+            });
+        
+
+        
+
+      
+        
+        
+
              // Tüm radio butonlarını seç
              const radioButonlar = document.querySelectorAll('input[type="radio"]');
+
+             
 
              // Her bir radyo düğmesi için
              radioButonlar.forEach(function(radio) {
@@ -34,31 +48,65 @@ document.addEventListener("DOMContentLoaded", function() {
                      var bRadioButtonName = 'b-' + index;
                      var aRadioButton = document.querySelector('input[name="' + aRadioButtonName + '"]:checked');
                      var bRadioButton = document.querySelector('input[name="' + bRadioButtonName + '"]:checked');
-                     
+               
+                    
+
                      if (aRadioButton && bRadioButton) {
                          var aRadioButtonValue = parseInt(aRadioButton.value);
                          var bRadioButtonValue = parseInt(bRadioButton.value);
                          
                          if (aRadioButtonValue + bRadioButtonValue <= 8) {
                              // Bir sonraki forma kaydır
-                             var nextFormIndex = parseInt(index);
+                             var nextFormIndex = parseInt(index)+1;
                              var nextFormId = '#form' + nextFormIndex;
                              var nextForm = document.querySelector(nextFormId);
                              if (nextForm) {
                                  nextForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
                              }
                          }
-                         else{
+                         else
+                        {
                             window.alert("Çift cevaplı soruların değerleri toplamı maximum 8 olmalıdır");
                             bRadioButton.checked=false;
                         }
-                     }
+                         }
+                       
+                       
+                        
+                        
+                        
+                    
                  });
              });
              
              
+        const eh_radiobuttonlar = document.querySelectorAll('.form2 input[type="radio"]');
+        eh_radiobuttonlar.forEach(function(radio){
 
-        
+            radio.addEventListener('change',function(){
+                var index = radio.getAttribute('name').split('-').pop();
+
+                var e_RadioButtonName = 'e-' + index;
+                
+
+                var eRadioButton = document.querySelector('.form2 input[name="' + e_RadioButtonName + '"]:checked');
+                
+
+                console.log(eRadioButton);
+                
+
+                if(eRadioButton){
+                    var nextFormIndex = parseInt(index)+1;
+                    var nextFormId = '#form2' + nextFormIndex;
+                    var nextForm = document.querySelector(nextFormId);
+                    if (nextForm) {
+                        nextForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+               
+            })
+
+        });
 
 
     });
