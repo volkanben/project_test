@@ -318,6 +318,9 @@ hr {
     align-items: center;
     justify-content: center;
 }
+.answer-question, .answer-question-1 {
+  text-align: center; /* Cevap metnini ortalar */
+}
 }
 @media only screen and (max-width: 800px) {
   .answers-class {
