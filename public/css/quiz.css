@@ -10,29 +10,39 @@
 
 }
 
-.board {
-  width: 100%;
-  max-width: 1000px; /* İçeriği sınırla */  
-
+.board .question,
+.board .answers-class {
+    margin-bottom: 70px; /* Örneğin, önceki değeri 150px'den 30px'ye düşürdüm */
 }
 
+
 .question {
- padding-top: 30px;
-  padding-bottom: 80px;
   width: 100%;
   text-align: center; /* İçeriği yatayda ortala */
 }
 
 .answers-class {
   display: flex;
-  justify-content: space-evenly; /* Elemanları yatayda boşluk bırakarak ortalar */
-  gap:20px;
+  justify-content: space-evenly;
+  gap: 80px;
   width: 100%;
 }
 .answer-question{
   display:flex;
   justify-content:center;
 }
+.answer-question,
+.answer-question-1{
+cursor:pointer;
+}
+.answer-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width:50%;
+}
+
+
 .answers-class-y {
   display: flex;
   justify-content: center; /* Elemanları yatayda tam ortalar */
@@ -197,10 +207,9 @@ input[type="radio"]:checked + label.ans-high-3-def {
 }
 
 hr {
-  
   border: none;
   border-top: 1px solid #DDDFE2;
-  width:90%;
+  width:100%;
   display:flex; 
 }
 
@@ -227,6 +236,107 @@ hr {
 .special-radio1 input[type="radio"]:checked + label,
 .special-radio2 input[type="radio"]:checked + label {
   color: rgb(95, 62, 244); /* Metnin rengini mavi yap */
+}
+@media only screen and (max-width: 1400px) {
+  /* Örnek bir stil değişikliği */
+  .main-content {
+      height: auto; /* Yükseklik otomatik olacak */
+      padding: 20px; /* İçeriğin etrafına boşluk eklenecek */
+  }
+
+  .question {
+      padding-bottom: 30px; /* Soru altında daha az boşluk olacak */
+  }
+  label {
+    display: inline-block;
+    margin-right: 12px; /* Butonlar arasındaki boşluk */
+    margin-top: 20px;
+    padding: 15px 15px; /* Buton boyutu ve içeriğin sağ ve solunda boşluk */
+    border-radius: 20px; /* Kenar yuvarlama */
+    cursor: pointer; /* Fare imleci değiştirme */
+    
+  }
+}
+@media only screen and (max-width: 1200px) {
+  /* Örnek bir stil değişikliği */
+  .main-content {
+      height: auto; /* Yükseklik otomatik olacak */
+      padding: 20px; /* İçeriğin etrafına boşluk eklenecek */
+  }
+
+  .question {
+      padding-bottom: 30px; /* Soru altında daha az boşluk olacak */
+  }
+  label {
+    display: inline-block;
+    margin-right: 5px; /* Butonlar arasındaki boşluk */
+    margin-top: 20px;
+    padding: 10px 10px; /* Buton boyutu ve içeriğin sağ ve solunda boşluk */
+    border-radius: 20px; /* Kenar yuvarlama */
+    cursor: pointer; /* Fare imleci değiştirme */
+    
+  }
+}
+@media only screen and (max-width: 1000px) {
+  /* Örnek bir stil değişikliği */
+  .answers-class {
+    flex-direction: column; /* Alt alta dizmek için yönü değiştirir */
+    align-items: center; /* İçeriği yatayda ortalar */
+    gap: 20px; /* Cevaplar arasındaki boşluk */
+  }
+  
+  .answer-container {
+    max-width: 100%; /* Konteyner genişliğini %100 yapar */
+  }
+  .main-content {
+      height: auto; /* Yükseklik otomatik olacak */
+     /* İçeriğin etrafına boşluk eklenecek */
+  }
+
+  .question {
+      padding-bottom: 30px; /* Soru altında daha az boşluk olacak */
+  }
+  .q-span{
+    font-size: 18px;
+  }
+  #s-question{
+    font-size: 22px;
+  }
+  label {
+    display: inline-block;
+    margin-right: 5px; /* Butonlar arasındaki boşluk */
+    margin-top: 20px;
+    padding: 13px 13px; /* Buton boyutu ve içeriğin sağ ve solunda boşluk */
+    border-radius: 20px; /* Kenar yuvarlama */
+    cursor: pointer; /* Fare imleci değiştirme */
+    
+  }
+  .answer-radio-1,
+.answer-radio-2 {
+    display: flex;
+    visibility: hidden;
+    align-items: center;
+    justify-content: center;
+}
+}
+@media only screen and (max-width: 800px) {
+  .answers-class {
+    flex-direction: column; /* Alt alta dizmek için yönü değiştirir */
+    align-items: center; /* İçeriği yatayda ortalar */
+    gap: 20px; /* Cevaplar arasındaki boşluk */
+  }
+  
+  .answer-container {
+    max-width: 100%; /* Konteyner genişliğini %100 yapar */
+  }
+  
+  .question {
+    margin-bottom: 20px; /* Sorunun altındaki boşluğu ayarlar */
+  }
+  
+  .answer-question, .answer-question-1 {
+    text-align: center; /* Cevap metnini ortalar */
+  }
 }
 
 

@@ -41,6 +41,15 @@ window.onclick = function(event) {
           modal2.style.display = "none";
       }
   }
-  
 
+    // id03 butonunu tıkladığında id01 modalını aç
+document.getElementById('id03').onclick = function() {
+  document.getElementById('id01').style.display = "block";
+}
+
+// id04 butonunu tıkladığında id02 modalını aç
+document.getElementById('id04').onclick = function() {
+  document.getElementById('id02').style.display = "block";
+}
+  
 

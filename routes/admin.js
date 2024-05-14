@@ -7,11 +7,30 @@ const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));  
 
+router.post('/filter/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const delete_aday = "DELETE FROM aday WHERE kullanici_id=?";
+  const delete_test = "DELETE FROM test WHERE kullanici_id=?";
+  const delete_cevap = "DELETE FROM cevap WHERE kullanici_id=?";
+
+  try {
+    const [rows1, fields1] = await db.execute(delete_aday, [id]);
+    const [rows2, fields2] = await db.execute(delete_test, [id]);
+    const [rows3, fields3] = await db.execute(delete_cevap, [id]);
+
+    res.redirect('/test2');
+  } catch (error) {
+    console.error("Silme işlemi sırasında bir hata oluştu:", error);
+    res.status(500).json({ success: false, message: "Kullanıcı silinirken bir hata oluştu." });
+  }
+});
+
 router.get('/filter',async (req,res)=>{
   const query = req.query.query;
   const [rows, fields] = await db.execute(query);
   const adaylar = rows.map(row => {
-    const formattedDate = new Date(row.tarih).toLocaleDateString('tr-TR');
+  const formattedDate = new Date(row.tarih).toLocaleDateString('tr-TR');
 
     return {
         id: row.kullanici_id,
@@ -25,6 +44,7 @@ router.get('/filter',async (req,res)=>{
         tarih: formattedDate,
         test_id: row.test_id
     };
+    
 });
 
  res.render('test_2', { 

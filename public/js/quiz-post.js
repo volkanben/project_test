@@ -3,9 +3,8 @@
 document.getElementById('gonder-butonu').addEventListener('click', function() {
     var gonderButonu = document.getElementById("gonder-butonu");
     if (gonderButonu) {
-        gonderButonu.addEventListener("click", function() {
-            // Düğmeye tıklandığında yapılacak işlemler
-        });
+          
+        
     } else {
         console.error("gonder-butonu id'sine sahip bir düğme bulunamadı.");
     }
@@ -58,21 +57,46 @@ document.getElementById('gonder-butonu').addEventListener('click', function() {
      kullanici_id_info[hiddenInput.name]=hiddenInput.value;
 
      formDataArray.push(kullanici_id_info);
+     console.log(formDataArray); // Tüm form verilerini konsola yazdır
+     
+    // Tüm form verilerini kontrol et
+var emptyQuestion = 0;
 
+function isFormDataArray(formDataArray) {
+    for (var i = 0; i < formDataArray.length; i++) {
+        var obj = formDataArray[i];
+        var keys = Object.keys(obj);
+        if (keys.length === 0) {
+            emptyQuestion += 1;
+        }
+    }
+}
+
+isFormDataArray(formDataArray);
+
+if (emptyQuestion === 0) {
+    document.getElementById('id01').style.display = "block";
     // AJAX ile sunucuya form verilerini gönderme
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/deneme', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log('Form verileri sunucuya başarıyla gönderildi:');
             console.log(formDataArray); // Tüm form verilerini konsola yazdır
-            
+
         } else {
             console.error('Form verileri sunucuya gönderilirken bir hata oluştu.');
         }
     };
     xhr.send(JSON.stringify(formDataArray));
+
+} else {
+    document.getElementById('id02').style.display = "block";
+}
+
+
+  
 
     
 });

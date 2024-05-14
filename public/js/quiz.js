@@ -61,8 +61,10 @@ document.addEventListener("DOMContentLoaded", function() {
                              var nextFormId = '#form' + nextFormIndex;
                              var nextForm = document.querySelector(nextFormId);
                              if (nextForm) {
-                                 nextForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                             }
+                                const yOffset = -100; // 50 piksel yukarıda duracak şekilde ayarla
+                                const y = nextForm.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                                window.scrollTo({ top: y, behavior: 'smooth' });
+                            }
                          }
                          else
                         {
@@ -80,33 +82,27 @@ document.addEventListener("DOMContentLoaded", function() {
              });
              
              
-        const eh_radiobuttonlar = document.querySelectorAll('.form2 input[type="radio"]');
-        eh_radiobuttonlar.forEach(function(radio){
-
-            radio.addEventListener('change',function(){
-                var index = radio.getAttribute('name').split('-').pop();
-
-                var e_RadioButtonName = 'e-' + index;
-                
-
-                var eRadioButton = document.querySelector('.form2 input[name="' + e_RadioButtonName + '"]:checked');
-                
-
-                console.log(eRadioButton);
-                
-
-                if(eRadioButton){
-                    var nextFormIndex = parseInt(index)+1;
-                    var nextFormId = '#form2' + nextFormIndex;
-                    var nextForm = document.querySelector(nextFormId);
-                    if (nextForm) {
-                        nextForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-               
-            })
-
-        });
+             const eh_radiobuttonlar = document.querySelectorAll('.form2 input[type="radio"]');
+             eh_radiobuttonlar.forEach(function(radio) {
+                 radio.addEventListener('change', function() {
+                     var index = radio.getAttribute('name').split('-').pop();
+                     var e_RadioButtonName = 'e-' + index;
+                     var eRadioButton = document.querySelector('.form2 input[name="' + e_RadioButtonName + '"]:checked');
+             
+                     if (eRadioButton) {
+                         var nextFormIndex = parseInt(index) + 1;
+                         var nextFormId = '#form2' + nextFormIndex;
+                         var nextForm = document.querySelector(nextFormId);
+             
+                         if (nextForm) {
+                             const yOffset = -100; // 50 piksel yukarıda duracak şekilde ayarla
+                             const y = nextForm.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                             window.scrollTo({ top: y, behavior: 'smooth' });
+                         }
+                     }
+                 });
+             });
+             
 
 
     });

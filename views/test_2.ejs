@@ -51,13 +51,32 @@
     <div class="col d-flex justify-content-end align-items-center">
       <div class="text-center text-md-start dashboardbox" style="margin-right: 20px;">
         <h4>Toplam Rapor Sayısı</h4>
-        <p align="center" style="font-size:20px; font-weight:700;"><%= aday.length %></p>
-      </div>
-    </div>
-    <div class="col d-flex justify-content-start align-items-center">
-      <div class="text-center text-md-start dashboardbox" style="margin-left: 20px;">
+        <p align="center" style="font-size:20px; font-weight:700;">
+          <% if (aday.length != 0) { %>
+            <%= aday.length %>
+          <% } else { %>
+          0
+           <% } %>
+        </p>
+        </div>
+        </div>
+        <div class="col d-flex justify-content-start align-items-center">
+        <div class="text-center text-md-start dashboardbox" style="margin-left: 20px;">
         <h4>En Son Eklenen Rapor</h4>
-        <p>Öğretmen Ad / Rapor Tarih</p>
+        <p align="center" style="font-size:15px; font-weight: 500;">
+        <% if (aday.length > 0) { %>
+          <% var sonEleman = aday[aday.length - 1]; %>
+          <%= sonEleman.ad %> / <%= sonEleman.tarih %>
+          <% } else { %>
+            <p align="center" style=" color:red;font-size:15px; font-weight: 500;">  Kayıt Bulunamadı </p>
+             <% } %>
+          </p>
+        </div>
+        </div>
+        
+        
+
+        
       </div>
     </div>
   </div>
@@ -105,24 +124,48 @@
             </thead>
             <tbody>
               <% aday.forEach((row, index) => { %>
-                <tr>
-                  <th scope="row"><%= index + 1 %></th>
-                  <td><%= row.id %></td>
-                  <td><%= row.ad %></td>
-                  <td><%= row.brans %></td>
-                  <td><%= row.tarih %></td>
-                  <td>
-                    <button class="btn btn-primary detail-btn"  name="<%= JSON.stringify(row) %>" data-bs-toggle="modal" data-bs-target="#raporModal">
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= row.id %></td>
+                <td><%= row.ad %></td>
+                <td><%= row.brans %></td>
+                <td><%= row.tarih %></td>
+                <td>
+                  <button class="btn btn-primary detail-btn" name="<%= JSON.stringify(row) %>" data-bs-toggle="modal"
+                    data-bs-target="#raporModal">
                     Detay
-                    </button>
-                  </td>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal<%= index %>">
+                    Sil
+                  </button>
+                  <div class="modal fade" id="deleteModal<%= index %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= index %>"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteModalLabel<%= index %>">Emin misiniz?</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p><b><%=row.ad%></b> adayını silmek istediğinize emin misiniz?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                          <form method="post" action="/filter/<%= row.id %>">
+                            <button type="submit" class="btn btn-danger">Evet</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   
-                  <td>
-                    <button class="btn btn-danger">Sil</button>
-                  </td>
-                </tr>
+                </td>
+              </tr>
               <% }) %>
             </tbody>
+            
             
           </table>
         </div>

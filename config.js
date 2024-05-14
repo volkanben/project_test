@@ -6,5 +6,4 @@ const config = {
         database:"deneme"
     }
 }
-
 module.exports = config;

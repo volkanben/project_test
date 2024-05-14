@@ -34,17 +34,36 @@
           
         </div>
     </div>
+    <div id="title-hidden" class="title-desc">
+        <div style="padding-bottom: 20px;">
+            <span style="font-size:30px;">Merhaba <%= name %></span>
+            <input  name="kullanici_id" type="hidden" value="<%= kullanici_id %>">
+        </div>
+        
+            <div style="padding: 20px;">
+            <h6 >Test iki bölümden oluşmaktadır , 10 soru çift cevaplı ve 10 soru <span style="color:purple;">Evet</span>/<span style="color:green">Hayır</span></h5>
+                <hr>
+            <h6>Lütfen çift cevaplı soruların cevaplarının ikisini de paunlayın , toplamları sekizi geçmemeli</h5>
+                <hr>
+            <h6>1 beni hiç yansıtmıyor , 7 tamamen beni yansıtıyor</h5>
+            </div>
+        </div>
     <div class="viewBox">
+       
         <div class="view">
-            <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                <path d="M0,100 L100,90 200,100 L300,90 400,100 L500,90 500,100 L500,00 L0,0 Z" style="stroke: none; fill:#33a474;"></path>
+            <svg  viewBox="0 0 500 120" preserveAspectRatio="xMinYMin meet">
+                <path d="M0,120 L100,110 240,116 L300,110 400,120 L500,108 500,120 L500,0 L0,0 Z" style="stroke: none; fill:#33a474;"></path>
             </svg>
-           </div>
+        </div>
         <div class="title-desc">
-            <span>Merhaba <%= name %></span>
-            <input name="kullanici_id" type="hidden" value="<%= kullanici_id %>">
-
-            
+            <div style="padding-bottom: 20px;">
+            <span >Merhaba <%= name %></span>
+            <input  name="kullanici_id" type="hidden" value="<%= kullanici_id %>">
+        </div>
+        
+            <h5>Test iki bölümden oluşmaktadır , 10 soru çift cevaplı ve 10 soru Evet/Hayır</h5>
+            <h5>Lütfen çift cevaplı soruların cevaplarının ikisini de paunlayın , toplamları sekizi geçmemeli</h5>
+            <h5>1 beni hiç yansıtmıyor , 7 tamamen beni yansıtıyor</h5>
         </div>
         <div class="desc" id="first-desc">
             <div>
@@ -54,7 +73,7 @@
                 <span>Çift cevaplı soruların cevaplarına tıklayıp 1 ve 7 arasında puanlayın</span>
             </div>
         </div>
-        <div class="desc" id="second-desc" >
+        <div class="desc" id="second-desc">
             <div>
                 <img src="/images/EH-son.png" alt="Resim" width="250px" height="250px">
             </div>
@@ -62,7 +81,9 @@
                 <span>Evet hayır sorularını üzerlerine tıklayarak cevaplayabilirsiniz</span>
             </div>
         </div>
-        </div>
+    </div>
+    
+    
        
     <div class="main-class">
         <div class="container">
@@ -76,10 +97,11 @@
                         <span id="s-question"><%= soru.soru %></span>
                     </div>
                     <div id="board-<%= index %>" class="answers-class">
+                        <div class="answer-container">
                         <div class="ans-1">
                             <div class="answer-question">
                                 <span><a style="color:rgb(55, 54, 54);text-decoration:none;font-size: 19px;" class="aTag">
-                                    <span><%= soru.secenek1 %></span>
+                                    <span class="q-span"><%= soru.secenek1 %></span>
                                       </a>
                                 </span>
                             </div>
@@ -106,10 +128,12 @@
                                 <label class="ans-high-3-def" for="a-7-<%= index %>"></label>
                             </div>
                         </div>
+                    </div>
+                    <div class="answer-container">
                         <div class="ans-2">
                             <div class="answer-question-1">
                                 <span><a class="bTag" style="color:rgb(55, 54, 54);text-decoration:none;font-size:19px;">
-                                    <span><%= soru.secenek2 %></span>
+                                    <span class="q-span"><%= soru.secenek2 %></span>
                                 </a></span>
                             </div>
                             <div class="answer-radio-2">
@@ -135,7 +159,7 @@
                                 <label class="ans-high-3-def" for="b-7-<%= index %>"></label>
                             </div>
                         </div>
-                       
+                    </div>
                     </div> 
                     </form>
                     <hr>
@@ -165,11 +189,54 @@
                 <hr>
             <% }) %>
             
-            <button id="gonder-butonu" onclick="Kaydet()" >Kaydet</button>
+            <button  id="gonder-butonu">Kaydet</button>
           <script src="/js/quiz-post.js" type="text/javascript"></script> 
         </div>
     </div>
+    <div id="id01" class="modal">
   
+        <form class="modal-content animate" style="width:40%;" action="/">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
+                <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
+              </svg>
+              
+          </div>
+      
+          <div class="container" align="center" style="padding-top:5px; padding-bottom: 10;">
+            <label style="margin-top: 5px;">Test başarıyla tamamlandı</label><br>
+            <button style="width:100px;">Tamam</button>
+           
+          </div>
+
+          
+      
+          
+        </form>
+      </div>
+      <div id="id02" class="modal">
+  
+        <form class="modal-content animate" style="width:40%;" >
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
+                <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
+              </svg>
+              
+          </div>
+      
+          <div class="container" align="center" style="padding-top:5px; padding-bottom: 10;">
+            <label style="margin-top: 5px;">Lütfen tüm soruları cevaplayınız</label><br>
+            
+           
+          </div>
+
+          
+      
+          
+        </form>
+      </div>
 
 </body>
 </html>

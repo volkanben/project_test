@@ -1,79 +1,103 @@
-.dashboardbox{
+/* Genel stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+/* Başlık stilleri */
+.title1 {
+    font-family: "GFS Didot", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 5%;
+}
+
+/* Logo stilleri */
+#logo {
+    margin-left: 5%;
+}
+
+/* İçerik bölümü stilleri */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Dashboard kutusu stilleri */
+.dashboardbox {
     border: 2px solid #0d6efd;
     margin-right: 10px;
     border-radius: 30px;
     padding: 20px;
 }
 
-
-#logo{
-  margin-left: 5%;
-
-}
-*{
-    background-color: #ffffff ;
-    color:rgb(0, 0, 0);
-}
-.list-group-item,.form-select{
+/* Liste öğesi ve form seçimi stilleri */
+.list-group-item,
+.form-select {
     color: rgb(0, 0, 0);
 }
 
+/* Küçük ekranlar için stiller */
 @media (max-width: 430px) {
     .table-responsive-sm {
-      overflow-x: auto;
+        overflow-x: auto;
     }
     .dashboardbox {
         width: 100%;
         margin-bottom: 20px;
-      }
-  }
+    }
+}
 
-
-
-  .topnav {
+/* Arama kutusu stilleri */
+.topnav {
     width: 100%;
     overflow: hidden;
-  }
+}
 
-  .search-container {
+.search-container {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
-  }
+}
 
-  .search-container input[type=text] {
-    width: 20%; /* Arama butonunun genişliği kadar düşürüldü */
+.search-container input[type=text] {
+    width: 20%;
     margin-top: 20px;
     font-size: 17px;
     color: black;
     border: 1px solid rgb(0, 0, 0);
     outline: none;
     border-radius: 0% !important;
+}
 
-  }
-
-  .search-container button {
+.search-container button {
     position: absolute;
     top: 8px;
-    left:20%;
+    left: 20%;
     width: 40px;
     height: 100%;
     padding: 6px 10px;
     background: transparent;
     border: 1px solid rgb(255, 255, 255);
-
     cursor: pointer;
-  }
+}
 
-  /* Bu kısım SVG simgesinin boyutunu ayarlar */
-  .search-container button svg {
+/* SVG simgesi stilleri */
+.search-container button svg {
     width: 16px;
     height: 16px;
     fill: currentColor;
-  }
-  
-  .modal-body{
-    color:black;
-  }
+}
+
+/* Modal içeriği stilleri */
+.modal-body {
+    color: black;
+}
 
