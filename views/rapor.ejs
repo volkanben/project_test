@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/rapor.css">
+    <link rel="stylesheet" href="/css/progress_rapor.css">
+
+</head>
+<body>
+    <section class="sidebar bg-body-tertiary p-3">
+        <div class="d-flex flex-column flex-shrink-0" style="width: 280px;">
+            <div>
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
+                        <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
+                    </svg>
+                    <span class="fs-4"> MİRROR</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="#adaybilgi" class="nav-link" aria-current="page">
+                            Aday Bilgileri
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#degerlendirme" class="nav-link link-body-emphasis">
+                            Aday Sonuçları
+                        </a>
+                    </li>
+                </ul>
+                
+               
+                <hr id="althr">
+            </div>
+            <div class="mt-auto">
+                <button class="btn btn-primary w-100 mb-2">ÇIKIŞ YAP</button>
+                <button class="btn btn-dark w-100">YAZDIR</button>
+            </div>
+        </div>
+    </section>
+    
+    <section style="width:80%"  id="adaybilgi" class="content">
+        <div class="adaybilgi mb-4 p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <h2 class="section-title">Aday Bilgileri</h2>
+            <div class="container">
+                <div class="row profile-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                </div>
+
+                <div class="row info-row">
+                    <div class="col-3">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.Ad_Soyad %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-2">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Telefon</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0<%= aday_info.tel %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">E mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.email %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Branş</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.brans_txt %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-5">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Adres</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.adres %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-2">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cinsiyet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.cinsiyet %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-2">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Yaş</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.dogum_tarihi %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test Tarihi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><%= aday_info.tarih.toLocaleDateString('tr-TR') %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div align="center" class="button"> <input type="button" onclick="results('<%= JSON.stringify(types) %>')" class="btn btn-primary" value="Sonuçlar için tıklayın"></div>
+            </div>
+            
+        </div>
+        
+        <section id="degerlendirme" style="display:none;">
+            <div class="card chart-container p-3-1" style="display:none;">
+                <div class="result">
+                    <h2 class="section-title">Aday Sonuçları</h2>
+                    
+                    <div>
+                        <ul class="legend">
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #c1121f;"></div>
+                                <div>Planlı - Spontan</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #335c67;"></div>
+                                <div>Bağımsız - Uyumlu</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #70e000;"></div>
+                                <div>Anlayışlı - Disiplinli</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #9d4edd;"></div>
+                                <div>Geleneksel - Modern</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: dodgerblue;"></div>
+                                <div>Samimi - Mesafeli</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: yellow;"></div>
+                                <div>İş Öğretmeni - Sınıf Öğretmeni</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: pink;"></div>
+                                <div>Yüksek Özsaygılı Öğretmen - Düşük Özsaygılı Öğretmen</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #cbc0d3;"></div>
+                                <div>Otokratik Öğretmen - Sosyal Öğretmen</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: orange;"></div>
+                                <div>Velilerle İşbirliğine Açık Öğretmen - Daha çok veliden bağımsız çalışan öğretmen</div>
+                            </li>
+                            <li class="legend-item">
+                                <div class="legend-color" style="background-color: #c27731;"></div>
+                                <div>Durağan Öğretmen - Gelişime Açık Öğretmen</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="circ_chart">
+                        <!-- Progress circles will be appended here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card chart-container p-3-2" style="display:none;">
+                <div class="failed">
+                    <h2 class="section-title">Aday Sonuçları</h2>
+                    <div class="circ_chart">
+                        <!-- Progress circles will be appended here by JavaScript -->
+                    </div>
+                    <div class="failure-message">
+                        <span class="failure-title">Test Başarısız</span>
+                        <br>
+                        <span class="failure-description">Bu durumda testi yanıtlayan kişinin testi anlamadığı ya da politik cevaplar verdiği düşünülebilir.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/js/rapor.js"></script>
+        </section>
+      
+   
+</body>
+</html>

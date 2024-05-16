@@ -1,0 +1,185 @@
+#degerlendirme{
+    margin-left: 10px;
+}
+#althr{
+margin-top: 200%;
+}
+
+.chart-container {
+    width: 100%;
+    height: 600px; /* Adjust the height as needed */
+    margin: auto;
+}
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.nav-pills {
+    margin-bottom: auto;
+}
+.content {
+    margin-left: 280px;
+    padding: 20px;
+}
+.card {
+    border: 1px solid #ddd;
+    max-width: 1000px !important;
+}
+
+
+.nav-link{
+    text-decoration: none;
+    color: black;
+}
+.nav-link:hover{
+    color: white !important;
+    background:#0d6efd;
+}
+
+.profile-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile-icon svg {
+    width: 100px;
+    height: 100px;
+}
+
+
+/* General adjustments for responsive design */
+.adaybilgi {
+    width: 100%;
+    max-width: 1000px; /* Set a max-width for better readability on larger screens */
+    margin: 0 auto; /* Center the container */
+}
+
+.adaybilgi .container {
+    padding: 20px; /* Add padding inside the container */
+}
+
+.adaybilgi .row {
+    margin-bottom: 20px; /* Add spacing between rows */
+}
+
+.adaybilgi .col-3 h1 {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    word-wrap: break-word; /* Ensure long words break to the next line */
+}
+
+.profile-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-icon svg {
+    width: 100px;
+    height: 100px;
+}
+
+/* Style for section titles */
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.legend {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 10px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .adaybilgi .col-3 {
+        flex: 0 0 50%; /* Make each column take 50% width on small screens */
+        max-width: 50%;
+    }
+
+    .adaybilgi .row {
+        margin-bottom: 10px; /* Reduce spacing between rows on small screens */
+    }
+
+    .adaybilgi .col-3 h1 {
+        font-size: 1.2rem; /* Adjust font size for small screens */
+    }
+
+    .section-title {
+        font-size: 1.5rem; /* Adjust title font size for small screens */
+    }
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 480px) {
+    .adaybilgi .col-3 {
+        flex: 0 0 100%; /* Make each column take 100% width on very small screens */
+        max-width: 100%;
+    }
+
+    .adaybilgi .col-3 h1 {
+        font-size: 1rem; /* Further adjust font size for very small screens */
+    }
+
+    .section-title {
+        font-size: 1.2rem; /* Adjust title font size for very small screens */
+    }
+}
+
+/* Styling for the chart container */
+.chart-container {
+    width: 100%;
+    height: 600px; /* Adjust the height as needed */
+    margin: auto;
+    padding: 20px; /* Add padding inside the chart container */
+    box-sizing: border-box; /* Ensure padding does not affect the total width */
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.failure-message {
+    color:red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.failure-title {
+    color:red;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.failure-description {
+  
+    font-size:20px;
+}
+

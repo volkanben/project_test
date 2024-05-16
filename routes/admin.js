@@ -105,6 +105,7 @@ res.redirect(`/filter?query=${encodeURIComponent(query_of_filter)}`);
 }
 });
 
+
 router.get('/test2', async (req, res) => {
  
   try {
@@ -190,8 +191,8 @@ router.get('/test/:id', async (req,res)=>{
         var mesafeli = 0;
         var is_öğretmeni = 0;
         var sinif_ogretmeni = 0;
-        var yüksek_özsaygili = 0;
-        var düsük_özsaygili = 0;
+        var yuksek_ozsaygili = 0;
+        var dusuk_ozsaygili = 0;
         var otokratik_ogretmen = 0;
         var sosyal_ogretmen = 0;
         var velilerle_isbirligine_acik = 0;
@@ -249,9 +250,9 @@ router.get('/test/:id', async (req,res)=>{
             break;
           case 6:
             if(inf.aSecenek_id==1)
-            yüksek_özsaygili+=parseInt(inf.secenekDeger)/2
+            yuksek_ozsaygili+=parseInt(inf.secenekDeger)/2
             else
-            düsük_özsaygili+=parseInt(inf.secenekDeger)/2
+            dusuk_ozsaygili+=parseInt(inf.secenekDeger)/2
             break;
           case 7:
             if(inf.aSecenek_id==1)
@@ -308,9 +309,9 @@ router.get('/test/:id', async (req,res)=>{
                         break;
                 case 5:
                         if(inf.bSecenek_id==1)
-                        düsük_özsaygili+=1.5;
+                        dusuk_ozsaygili+=1.5;
                         else
-                        yüksek_özsaygili+=1.5
+                        yuksek_ozsaygili+=1.5
                         break;  
                 case 6:
                         if(inf.bSecenek_id==1)
@@ -345,44 +346,44 @@ router.get('/test/:id', async (req,res)=>{
     
        types = {
             CA: {
-              planli: planli,
-              spontan: spontan
+              'planlı': planli,
+              'spontan': spontan
             },
             CB: {
-              bagimsiz: bagimsiz,
-              uyumlu: uyumlu
+              'bağımsız': bagimsiz,
+              'uyumlu': uyumlu
             },
             CC: {
-              anlayisli: anlayisli,
-              disiplinli: disiplinli
+              'anlayışlı': anlayisli,
+              'disiplinli': disiplinli
             },
             CD: {
-              geleneksel: geleneksel,
-              modern: modern
+              'geleneksel': geleneksel,
+              'modern': modern
             },
             CE: {
-              samimi: samimi,
-              mesafeli: mesafeli
+              'samimi': samimi,
+              'mesafeli': mesafeli
             },
             CF: {
-              is_öğretmeni: is_öğretmeni,
-              sinif_ogretmeni: sinif_ogretmeni
+              'iş öğretmeni': is_öğretmeni,
+              'sınıf öğretmeni': sinif_ogretmeni
             },
             CG: {
-              yüksek_özsaygili: yüksek_özsaygili,
-              düsük_özsaygili: düsük_özsaygili
+              'yüksek özsaygılı': yuksek_ozsaygili,
+              'düşük özsaygılı': dusuk_ozsaygili
             },
             CH: {
-              otokratik_ogretmen: otokratik_ogretmen,
-              sosyal_ogretmen: sosyal_ogretmen
+              'otokratik ': otokratik_ogretmen,
+              'sosyal': sosyal_ogretmen
             },
             CI: {
-              velilerle_isbirligine_acik: velilerle_isbirligine_acik,
-              bagimsiz_calisan_ogretmen: bagimsiz_calisan_ogretmen
+              'işbirliğine açık': velilerle_isbirligine_acik,
+              'bağımsız çalışan': bagimsiz_calisan_ogretmen
             },
             CJ: {
-              duragan_ogretmen: duragan_ogretmen,
-              gelisime_acik_ogretmen: gelisime_acik_ogretmen
+              'durağan': duragan_ogretmen,
+              'gelişime açık': gelisime_acik_ogretmen
             }
           }
           
@@ -415,12 +416,50 @@ router.get('/test/:id', async (req,res)=>{
               });
             }
           }
+
+          let result = [];
+          Object.keys(types).forEach(key => {
+            let innerData = types[key];
+            Object.keys(innerData).forEach(innerKey => {
+              let innerValue = innerData[innerKey];
+              result.push({ [innerKey]: innerValue });
+            });
+          });  
+
+          const mapValues = {
+            1: 20,
+            1.5: 30,
+            2: 40,
+            2.5: 50,
+            3: 60,
+            3.5: 70,
+            4: 80,
+            4.5: 90,
+            5: 100
+        };
+        
+        // Değerlerin dönüştürülmesi
+        result.forEach(function(item) {
+            Object.keys(item).forEach(function(key) {
+                let value = item[key];
+                if (value >= 5) {
+                    item[key] = 100;
+                } else {
+                    item[key] = mapValues[value];
+                }
+            });
+        });
        
     console.log(types);
-        res.render('test-details', {
+        res.render('rapor', {
            aday_info:rows[0],
-        types:types
-        })
+            types: result 
+        });
+
+
+
+console.log(result); // Sonucu görüntüle
+
        
     }
     catch (error) {
@@ -430,7 +469,7 @@ router.get('/test/:id', async (req,res)=>{
     });
     
     
-    router.get('/test',async (req,res)=>{
+router.get('/test',async (req,res)=>{
     
     
         try {
@@ -494,7 +533,7 @@ router.get('/test/:id', async (req,res)=>{
           console.log('res',results);
           if (results[0].length > 0) {
               // Doğru kimlik doğrulaması yapıldığında "/test" sayfasına yönlendir
-              res.redirect('/test');
+              res.redirect('/test2');
           }else{
             res.status(401).send({error:'Kullanıcı adı veya şifre yanlış.'});
             return;

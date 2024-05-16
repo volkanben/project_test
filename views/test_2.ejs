@@ -124,22 +124,22 @@
             </thead>
             <tbody>
               <% aday.forEach((row, index) => { %>
-              <tr>
+              <tr onclick="window.location.href = '/test/' + '<%= row.id %>';" style="cursor:pointer">
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= row.id %></td>
                 <td><%= row.ad %></td>
                 <td><%= row.brans %></td>
                 <td><%= row.tarih %></td>
                 <td>
-                  <button class="btn btn-primary detail-btn" name="<%= JSON.stringify(row) %>" data-bs-toggle="modal"
-                    data-bs-target="#raporModal">
-                    Detay
-                  </button>
+                  <input onclick="event.stopPropagation()" class="btn btn-primary detail-btn" name="<%= JSON.stringify(row) %>" data-bs-toggle="modal"
+                    data-bs-target="#raporModal" type="button" value="Detay">
+                    
+                  
                 </td>
                 <td>
-                  <button class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal<%= index %>">
-                    Sil
-                  </button>
+                  <input type="button" value="Sil" onclick="event.stopPropagation()" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal<%= index %>">
+                    
+                 
                   <div class="modal fade" id="deleteModal<%= index %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= index %>"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
