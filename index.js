@@ -13,16 +13,15 @@ const adminRoutes = require("./routes/admin");
 
 const mysql = require('mysql2/promise');
 
-// MySQL bağlantısını oluşturma
 let connection;
 
 async function initializeConnection() {
     try {
         connection = await mysql.createConnection({
-            host: 'localhost',    // MySQL sunucusunun adresi
-            user: 'root',         // MySQL kullanıcı adı
-            password: 'Volkinger0660.', // MySQL kullanıcı şifresi
-            database: 'deneme'      // Bağlanmak istediğiniz veritabanı
+            host: 'localhost',   
+            user: 'root',        
+            password: 'Volkinger0660.', 
+            database: 'boirjxc4w9kcvwe6z3dz'     
         });
     } catch (error) {
         console.error('MySQL bağlantısı oluşturulamadı:', error);
