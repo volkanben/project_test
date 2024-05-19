@@ -52,6 +52,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
           window.location.href = '/test2';
       }
   } catch (error) {
+    console.log(error);
       showError('Bir hata oluştu, lütfen tekrar deneyin.');
   }
 });

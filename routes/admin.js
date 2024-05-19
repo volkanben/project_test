@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../data/get_question");
-
 const bodyParser = require("body-parser");
 
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));  
 
+// Oturum kontrol middleware'i burada kullanın
+
+
+router.use(bodyParser.json());
+
+router.use(bodyParser.urlencoded({ extended: true }));  
 router.post('/filter/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -186,7 +189,6 @@ router.post('/password', async (req, res) => {
   }
 });
 
-
 router.get('/test2', async (req, res) => {
  
   try {
@@ -258,7 +260,6 @@ res.render('test_2',  {
     res.status(500).send('Internal Server Error');
 }
 });
-
 
 router.get('/test/:id', async (req,res)=>{
     try{
@@ -627,56 +628,25 @@ router.get('/test',async (req,res)=>{
         }
 });
 
-    router.post('/test', async (req, res) => {
-      const username = req.body.uname;
-      const password = req.body.psw;
-      const query_aut = `SELECT * FROM kurum WHERE username=? AND password=?`;
+router.post('/test', async (req, res) => {
+  const username = req.body.uname;
+  const password = req.body.psw;
+  const query_aut = `SELECT * FROM kurum WHERE username=? AND password=?`;
   
-      if (req.body.remember === 'on') {
-          try {
-              const results = await db.execute(query_aut, [username, password]);
-              if (results[0].length > 0) {
-                  res.redirect('/test2');
-              } else {
-                  res.status(401).json({ error: 'Kullanıcı adı veya şifre yanlış.' });
-              }
-          } catch (err) {
-              console.error('MySQL sorgusu sırasında bir hata oluştu:', err);
-              res.status(500).json({ error: 'Bir hata oluştu, lütfen tekrar deneyin.' });
-          }
+  try {
+      const results = await db.execute(query_aut, [username, password]);
+      if (results[0].length > 0) {
+          const user = results[0][0]; // Kullanıcı bilgilerini alın
+          res.redirect('/test2');
       } else {
-          try {
-              function generateSessionID() {
-                  const time = new Date();
-                  const year = time.getFullYear().toString();
-                  const seconds = time.getSeconds().toString();
-                  const milliseconds = time.getMilliseconds().toString();
-                  return year + milliseconds + seconds;
-              }
-  
-              const kullanici_id = generateSessionID();
-              const inf_form = req.body;
-              const { ad, soyad, brans, phone, email, gender, address, birthday } = inf_form;
-  
-              const info_query = `INSERT INTO aday (kullanici_id, ad, soyad, brans, tel, email, cinsiyet, adres, dogum_tarihi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-              const values = [kullanici_id, ad, soyad, brans, phone, email, gender, address, birthday];
-              
-              const test_info_query = `INSERT INTO test (kullanici_id, kurum_id, tarih) VALUES (?, ?, ?)`;
-              const value_test = [kullanici_id, 1, new Date()];
-              
-              const check = await db.execute(info_query, values);
-              if (check) {
-                  await db.execute(test_info_query, value_test);
-                  res.redirect(`/deneme?param1=${kullanici_id}&param2=${ad}`);
-              } else {
-                  res.status(500).json({ error: 'Kayıt işlemi sırasında bir hata oluştu.' });
-              }
-          } catch (error) {
-              console.error('İşlem sırasında bir hata oluştu: ', error);
-              res.status(500).json({ error: 'Bir hata oluştu, lütfen tekrar deneyin.' });
-          }
+          res.status(401).json({ error: 'Kullanıcı adı veya şifre yanlış.' });
       }
+  } catch (err) {
+      console.error('MySQL sorgusu sırasında bir hata oluştu:', err);
+      res.status(500).json({ error: 'Bir hata oluştu, lütfen tekrar deneyin.' });
+  }
 });
-  
+
+
  
 module.exports = router;
