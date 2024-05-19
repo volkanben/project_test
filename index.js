@@ -21,7 +21,7 @@ async function initializeConnection() {
             host: 'localhost',   
             user: 'root',        
             password: 'Volkinger0660.', 
-            database: 'boirjxc4w9kcvwe6z3dz'     
+            database: 'deneme'     
         });
     } catch (error) {
         console.error('MySQL bağlantısı oluşturulamadı:', error);
