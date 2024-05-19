@@ -107,44 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
-    const progress_bar = document.querySelector(".bar");
-    const time = document.querySelector(".time");
-    window.addEventListener("scroll",function(){
-        if(window.scrollY>400){
-            progress_bar.style.display="block";
-            time.style.display="block";
-            
-        }
-        else{
-            progress_bar.style.display="none";
-            time.style.display="none";
-        }
-    });
-// Tüm radio butonlarını seçin
-
-// Progress bar öğesini seçin
-const progressBar = document.querySelector('.bar');
-
-sorularCevaplar.forEach((soru, index) => {
-    // Her form içindeki radio butonlarını seçin
-    const radioButonlar = document.querySelectorAll(`#first-form${index} input[type="radio"], #second-form${index} input[type="radio"]`);
-
-    // Progress barın artması için olay dinleyicisi ekle
-    let progressIncreased = false;
-
-    // Her form içindeki radio butonları için olay dinleyicisi ekle
-    radioButonlar.forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            // Progress bar henüz artırılmadıysa
-            if (!progressIncreased) {
-                // Progress barı artır
-                const progressValue = ((index + 1) * 100) / sorularCevaplar.length;
-                progressBar.style.width = progressValue + '%';
-                progressIncreased = true;
-            }
-        });
-    });
-});
 
 });
 function kontrolEt() {

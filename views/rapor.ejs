@@ -11,20 +11,20 @@
 </head>
 <body>
     <section class="sidebar bg-body-tertiary p-3">
-        <div class="d-flex flex-column flex-shrink-0" style="width: 280px;">
+        <div class="d-flex flex-column flex-shrink-0" style="width: 200px;">
             <div>
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
                         <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
                     </svg>
-                    <span class="fs-4"> MİRROR</span>
+                    <span class="fs-5"> MİRROR</span>
                 </a>
-                <hr>
+                <br>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#adaybilgi" class="nav-link" aria-current="page">
-                            Aday Bilgileri
+                        <a href="/test2" class="nav-link" aria-current="page">
+                            Aday Raporları
                         </a>
                     </li>
                     <li>
@@ -32,14 +32,25 @@
                             Aday Sonuçları
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/new_user" class="nav-link link-body-emphasis">
+                          Kullanıcı Ekle
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/password" class="nav-link link-body-emphasis">
+                          Şifre İşlemleri
+                        </a>
+                      </li>
+                    
                 </ul>
                 
                
                 <hr id="althr">
             </div>
             <div class="mt-auto">
-                <button class="btn btn-primary w-100 mb-2">ÇIKIŞ YAP</button>
-                <button class="btn btn-dark w-100">YAZDIR</button>
+               <a href="/"> <button class="btn btn-primary w-100 mb-2">ÇIKIŞ YAP</button></a>
+              
             </div>
         </div>
     </section>
@@ -170,7 +181,12 @@
                         </table>
                     </div>
                 </div>
-                <div align="center" class="button"> <input type="button" onclick="results('<%= JSON.stringify(types) %>')" class="btn btn-primary" value="Sonuçlar için tıklayın"></div>
+                <div align="center" class="button">
+                    <input type="button" 
+                           onclick="results('<%= JSON.stringify(types) %>', '<%= JSON.stringify(check) %>')" 
+                           class="btn btn-primary" 
+                           value="Sonuçlar için tıklayın">
+                </div>
             </div>
             
         </div>

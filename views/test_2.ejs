@@ -6,6 +6,7 @@
   <title>Admin Paneli - Öğretmen Adayı Psikolojik Analiz Raporları</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/test.css">
+  <link rel="stylesheet" href="/css/rapor.css">
   <style>
     @media (max-width: 400px) {
       .table-responsive-sm {
@@ -15,33 +16,90 @@
   </style>
 </head>
 <body>
+  <section class="sidebar bg-body-tertiary p-3">
+    <div class="d-flex flex-column flex-shrink-0" style="width: 200px;">
+        <div>
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none" style="color: black;">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-symmetry-vertical" viewBox="0 0 16 16">
+                <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
+            </svg>
+            <span class="fs-5"> MİRROR</span>
+        </a>
+        
+           <br>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                  <a href="#raporlar" class="nav-link link-body-emphasis">
+                    Aday Raporları
+                </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/new_user" class="nav-link link-body-emphasis">
+                    Kullanıcı Ekle
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/password" class="nav-link link-body-emphasis">
+                    Şifre İşlemleri
+                  </a>
+                </li>
+                
+            </ul>
+            
+           
+            
+        </div>
+       
+        <hr id="althr">
+      </div>
+      <div class="mt-auto">
+         <a href="/"> <button class="btn btn-primary w-100 mb-2">ÇIKIŞ YAP</button></a>
+        
+      </div>
+    </div>
+</section>
   <header>
-    <span id="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-symmetry-vertical logo" viewBox="0 0 16 16">
-        <path d="M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484M10 4.46V13h4.658z"/>
-      </svg>
-    </span>
-   
-    <span>MİRROR</span>
- 
-    <h1 class="text-center mb-5 mt-5">Öğretmen Adayı Psikanaliz Raporları</h1>
-    <hr style="color: rgb(0, 0, 0); height: 2px;margin: 5px 20%;color: #0d6efd;">
+    <div class="row" >
+    <h1 style="padding-left :10%; padding-top:5%;">Öğretmen Adayı Psikanaliz Raporları</h1>
+    
+  </div>
   </header>
 
 <!-- Bildirimler -->
 <div class="container mt-5">
-  <div class="row">
-      <div class="col" style="border: 2px solid #0d6efd; border-radius: 30px; padding: 15px;">
+  <div class="row" >
+      <div class="col">
       
-         <h2 class="text-center mb-4"> Bildirimler
+         <h2 class="text-center mb-3"> <%=unread.length%> yeni rapor
           <span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="50" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
           </svg></span> 
          </h2>
-          <ul class="list-group" id="notificationList">
-              <!-- Bildirimler buraya gelecek -->
-              <li style="color:black;" class="list-group-item">Yeni bir rapor eklendi - Rapor No: 0004</li>
-          </ul>
+        
+         <div class="container mt-4">
+          <div class="accordion" id="notificationAccordion">
+            <% unread.forEach((not, index) => { %>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading<%= index %>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="false" aria-controls="collapse<%= index %>">
+                  <%= not.not_ad %>
+                </button>
+              </h2>
+              <div id="collapse<%= index %>" class="accordion-collapse collapse" aria-labelledby="heading<%= index %>" data-bs-parent="#notificationAccordion">
+                <div class="accordion-body">
+                  Tarih: <%= not.date %> - Saat: <%= not.time %>
+                  <a href="/test/<%= not.id %>" class="btn btn-primary btn-sm">Detay</a>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        
+        
+        
+          
       </div>
   </div>
 </div>
@@ -82,12 +140,13 @@
   </div>
 </div>
 
-
+<section id="raporlar">
   <div class="container mt-5 mb-5">
     <div class="row">
       <div class="col" style="border: 2px solid #0d6efd; border-radius: 30px; padding: 15px;">
         <h2 class="text-center mb-4">Rapor Listesi</h2>
-        <button class="filter-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#raporDetayModal">
+        <div class="filter_contain">
+        <button class="filter-btn btn btn-primary" style="padding:7px; height: 50px;" data-bs-toggle="modal" data-bs-target="#raporDetayModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
             <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
           </svg>
@@ -108,7 +167,7 @@
           </div>
           
         </form>
-      
+      </div>
         <div class="table-responsive-sm">
           <table class="table table-hover table-light mt-5">
             <thead>
@@ -138,7 +197,7 @@
                 </td>
                 <td>
                   <input type="button" value="Sil" onclick="event.stopPropagation()" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal<%= index %>">
-                    
+                </td>  
                  
                   <div class="modal fade" id="deleteModal<%= index %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= index %>"
                     aria-hidden="true">
@@ -161,7 +220,7 @@
                     </div>
                   </div>
                   
-                </td>
+                
               </tr>
               <% }) %>
             </tbody>
@@ -172,7 +231,7 @@
       </div>
     </div>
   </div>
-
+</section>
   <!-- Modal -->
   <div class="modal fade" id="raporDetayModal" tabindex="-1" aria-labelledby="raporDetayModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

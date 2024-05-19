@@ -182,4 +182,6 @@ margin-top: 200%;
   
     font-size:20px;
 }
-
+.filter_contain{
+    display:flex;
+}

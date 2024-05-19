@@ -1,7 +1,7 @@
 
 .main-content {
   margin: 0 auto; /* Yatayda tam ortalar */
-  height: 350px;
+  height: 300px;
   width: 95%;
   display: flex;
   flex-direction: column;
@@ -207,7 +207,6 @@ input[type="radio"]:checked + label.ans-high-3-def {
 }
 
 hr {
-  border: none;
   border-top: 1px solid #DDDFE2;
   width:100%;
   display:flex; 

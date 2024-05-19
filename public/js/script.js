@@ -22,34 +22,72 @@ var iller = [
 
 
 
-
-
-var modal = document.getElementById('id01');
-
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-  var modal2 = document.getElementById('id02');
-
-
-  window.onclick = function(event) {
-      if (event.target == modal2) {
-          modal2.style.display = "none";
-      }
-  }
-
-    // id03 butonunu tıkladığında id01 modalını aç
 document.getElementById('id03').onclick = function() {
   document.getElementById('id01').style.display = "block";
 }
 
-// id04 butonunu tıkladığında id02 modalını aç
 document.getElementById('id04').onclick = function() {
   document.getElementById('id02').style.display = "block";
 }
   
 
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+  const data = {};
+  formData.forEach((value, key) => data[key] = value);
+
+  try {
+      const response = await fetch(this.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+          const result = await response.json();
+          showError(result.error);
+      } else {
+          window.location.href = '/test2';
+      }
+  } catch (error) {
+      showError('Bir hata oluştu, lütfen tekrar deneyin.');
+  }
+});
+
+function showError(message) {
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+}
+
+
+function validateYear() {
+  var yearInput = document.getElementById("birthday").value;
+  if (yearInput.length !== 4) {
+    document.getElementById("date-error").style.display = "block";
+    return false;
+  } else {
+    document.getElementById("date-error").style.display = "none";
+    return true;
+  }
+}
+
+// 
+
+function onlyLetters(input) {
+  var regex = /[^a-zA-ZğüşöçĞÜŞİÖÇ]/g;
+  input.value = input.value.replace(regex, "");
+}
+
+var emo_tag = document.querySelector('.emo')
+var pass_input = document.querySelector('.psw1')
+emo_tag.addEventListener('click',function(){
+  if(pass_input.type!='text'){
+  pass_input.setAttribute('type','text');
+}
+else {
+  pass_input.setAttribute('type','password');
+}
+});

@@ -1,12 +1,12 @@
 
 
-document.getElementById('gonder-butonu').addEventListener('click', function() {
-    var gonderButonu = document.getElementById("gonder-butonu");
+document.getElementById('insert_btn').addEventListener('click', function() {
+    var gonderButonu = document.getElementById("insert_btn");
     if (gonderButonu) {
           
         
     } else {
-        console.error("gonder-butonu id'sine sahip bir düğme bulunamadı.");
+        console.error("insert_btn id'sine sahip bir düğme bulunamadı.");
     }
 
     var formDataArray = []; // Tüm form verilerini saklamak için boş bir dizi oluştur
@@ -20,8 +20,7 @@ document.getElementById('gonder-butonu').addEventListener('click', function() {
 
         // Form içindeki tüm input elemanlarını seç
         var inputs = form.querySelectorAll('input');
-    
-
+       
         // Her bir input elemanını döngüye alarak işlem yap
         inputs.forEach(function(input) {
             // Eğer input bir radio düğmesi ise ve seçili ise

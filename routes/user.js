@@ -124,14 +124,6 @@ router.post('/deneme', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
-
-
 router.get('/', (req, res) => {
     res.render('index');
   });
