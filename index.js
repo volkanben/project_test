@@ -11,40 +11,7 @@ app.use(express.static('node_modules'));
 const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
 
-const mysql = require('mysql2/promise');
 
-let connection;
-
-async function initializeConnection() {
-    try {
-        connection = await mysql.createConnection({
-            host: 'localhost',   
-            user: 'root',        
-            password: 'Volkinger0660.', 
-            database: 'deneme'     
-        });
-    } catch (error) {
-        console.error('MySQL bağlantısı oluşturulamadı:', error);
-    }
-}
-
-async function executeQuery(query, params) {
-    if (!connection || connection.connection._closing) {
-        // Bağlantı kapalıysa yeniden oluşturun
-        await initializeConnection();
-    }
-
-    try {
-        const [results, fields] = await connection.execute(query, params);
-        return results;
-    } catch (error) {
-        console.error('Sorgu çalıştırılırken hata oluştu:', error);
-        throw error;
-    }
-}
-
-// Uygulama başlangıcında bağlantıyı oluşturun
-initializeConnection();
 app.use(userRoutes); 
 app.use(adminRoutes); 
 

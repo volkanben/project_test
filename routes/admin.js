@@ -198,7 +198,7 @@ router.get('/test2', async (req, res) => {
     FROM aday a
     JOIN test t ON a.kullanici_id = t.kullanici_id
     join branslar b on a.brans = b.brans_id 
-    ORDER BY t.tarih DESC
+    ORDER BY t.tarih ASC
     LIMIT 0, 1000;
     `;
 
