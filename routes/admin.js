@@ -489,7 +489,7 @@ router.get('/test/:id', async (req,res)=>{
               'düşük özsaygılı': dusuk_ozsaygili
             },
             CH: {
-              'otokratik ': otokratik_ogretmen,
+              'otokratik': otokratik_ogretmen,
               'sosyal': sosyal_ogretmen
             },
             CI: {
