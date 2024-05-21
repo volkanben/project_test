@@ -121,6 +121,9 @@ h1 {
   <a href="#raporlar" class="nav-link link-body-emphasis">
     Aday Raporları
 </a>
+<a href="/analiz" class="nav-link link-body-emphasis">
+  Analiz
+</a>
   <a href="/new_user" class="nav-link link-body-emphasis">
     Kullanıcı Ekle
   </a>
@@ -131,12 +134,13 @@ h1 {
     Çıkış yap
   </a>
 </div>
-<header>
-  <div class="row">
+
+  
+
+<div class="row justify-content-center">
+  <div class="row" style="padding-top:50px;">
     <h1>Öğretmen Adayı Psikanaliz Raporları</h1>
   </div>
-</header>
-<div class="row justify-content-center">
   <div class="col-md-12">
     <h2 class="text-center mb-3">
       <%=unread.length%> yeni rapor
@@ -149,7 +153,7 @@ h1 {
     
     <div class="container mt-4">
     
-        <!-- Burada raporlar listeleniyor -->
+       
         <div class="accordion" id="notificationAccordion">
           <% unread.forEach((not, index) => { %>
           <div class="accordion-item">
@@ -199,6 +203,32 @@ h1 {
         </p>
       </div>
     </div>
+    <div class="col d-flex justify-content-start align-items-center">
+      <div class="text-center text-md-start dashboardbox" style="margin-left: 20px;">
+        <h4>En Son Eklenen Rapor</h4>
+        <p align="center" style="font-size:15px; font-weight: 500;">
+        <% if (aday.length > 0) { %>
+          <% var sonEleman = aday[aday.length - 1]; %>
+          <%= sonEleman.ad %> / <%= sonEleman.tarih %>
+        <% } else { %>
+          <p align="center" style="color:red;font-size:15px; font-weight: 500;">Kayıt Bulunamadı</p>
+        <% } %>
+        </p>
+      </div>
+    </div>
+    <div class="col d-flex justify-content-start align-items-center">
+      <div class="text-center text-md-start dashboardbox" style="margin-left: 20px;">
+        <h4>En Son Eklenen Rapor</h4>
+        <p align="center" style="font-size:15px; font-weight: 500;">
+        <% if (aday.length > 0) { %>
+          <% var sonEleman = aday[aday.length - 1]; %>
+          <%= sonEleman.ad %> / <%= sonEleman.tarih %>
+        <% } else { %>
+          <p align="center" style="color:red;font-size:15px; font-weight: 500;">Kayıt Bulunamadı</p>
+        <% } %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -208,25 +238,23 @@ h1 {
       <div class="col-md-12" style="padding: 15px; border: 1px solid rgb(207, 207, 207); border-radius: 3px;">
         <h2 class="text-center mb-4">Rapor Listesi</h2>
         <div class="filter_contain" style="display: flex; justify-content: flex-end;">
-                     <!-- "İsim ile arayın" giriş alanı ve arama butonu -->
-                     <form style="display: flex; align-items: center;">
+                 
+                     <form action="filter" method="POST" style="display: flex; align-items: center;">
                       <input style="color:black;" class="form-control" type="text" placeholder="İsim ile arayın" name="aday_name">
-                      <button type="submit" style="margin-left: 0px; border-radius: 5px;border: 1px solid rgb(218, 218, 218);">
+                      <button type="submit" style="margin-left: 0px; border-radius: 5px;border: 0px ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="35" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
                         </svg>
                       </button>
                     </form>
-                    <!-- "İsim ile arayın" giriş alanı ve arama butonu sonu -->
-          <!-- "Filtrele" butonu -->
+                
           <button class="filter-btn btn btn-primary" style="padding:7px; height: 50px; margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#raporDetayModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
               <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
             </svg>
             Filtrele
           </button>
-          <!-- "Filtrele" butonu sonu -->
-
+       
         </div>
 
     <div class="table-responsive-sm">
@@ -323,7 +351,27 @@ h1 {
           <option value="16">İngilizce</option>
           <option value="17">Almanca</option>
         </select>
-        <br>
+        <label>
+          <b>Cinsiyet</b></label>
+          <select style="color:black" name="cinsiyet" class="form-select" aria-label="select example" id="cinsiyet">
+        <option value="">Cinsiyet seçiniz</option>
+      <option value="1">Kadın</option>
+      <option value="2">Erkek</option>
+      <option value="3">Belirsiz</option>
+      </select>
+
+      <label>
+        <b>Deneyim</b></label>
+        <select style="color:black" name="deneyim" class="form-select" aria-label="select example" id="deneyim">
+          <option value="">Deneyim seçiniz</option>
+          <option value="5">14+</option>
+          <option value="4">11-13</option>
+          <option value="3">7-9</option>
+          <option value="2">4-6</option>
+          <option value="1">1-3</option>
+          <option value="0">0</option>
+
+      
         <input type="checkbox" id="filterCheckbox" name="filterCheckbox">
         <label for="filterCheckbox">Tüm filtreleri kaldır</label><br>
         <div class="modal-footer">

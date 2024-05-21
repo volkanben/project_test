@@ -66,16 +66,21 @@ function showError(message) {
 
 function validateYear() {
   var yearInput = document.getElementById("birthday").value;
-  if (yearInput.length !== 4) {
-    document.getElementById("date-error").style.display = "block";
-    return false;
+  var yearlength = yearInput.substring(4,5);
+  var year = yearInput.substring(0,4);
+  var currentYear = new Date().getFullYear();
+  var age = currentYear - year;
+  var dateError = document.getElementById("date-error");
+  if (age >= 22 && age <= 55 && yearlength=='-') {
+      dateError.style.display = "none";
+      document.getElementById('btn').disabled = false;
   } else {
-    document.getElementById("date-error").style.display = "none";
-    return true;
+      dateError.style.display = "block";
+      document.getElementById('btn').disabled = true;
   }
 }
 
-// 
+
 
 function onlyLetters(input) {
   var regex = /[^a-zA-ZğüşöçĞÜŞİÖÇ]/g;

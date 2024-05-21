@@ -44,6 +44,7 @@ function addProgressCircle(key, value, color) {
 }
 
 function results(jsonData) {
+    
     const data = JSON.parse(jsonData);
     let hundredCount = 0;
 
@@ -63,7 +64,6 @@ function results(jsonData) {
     degerlendirmeSection.style.display = 'block';
 
     if (hundredCount >= 3) {
-        console.log("test geçersiz");
         successCard.style.display = 'none';
         failureCard.style.display = 'flex';
     } else {

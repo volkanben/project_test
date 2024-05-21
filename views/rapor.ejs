@@ -33,6 +33,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="/analiz" class="nav-link link-body-emphasis">
+                          Analizler
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/new_user" class="nav-link link-body-emphasis">
                           Kullanıcı Ekle
                         </a>
@@ -89,6 +94,37 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-2">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Deneyim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <% if (aday_info.experiences === '0') { %>
+                                            Deneyimsiz
+                                        <% } else if (aday_info.experiences === '1') { %>
+                                            1-3 yıl
+                                        <% } else if (aday_info.experiences === '2') { %>
+                                            4-6 yıl
+                                        <% } else if (aday_info.experiences === '3') { %>
+                                            7-9 yıl
+                                        <% } else if (aday_info.experiences === '4') { %>
+                                            11-13 yıl
+                                        <% } else if (aday_info.experiences === '5') { %>
+                                            14+ yıl
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            
+                            
+                        </table>
+                        
+                    </div>
                     <div class="col-3">
                         <table class="table ">
                             <thead>
@@ -113,6 +149,20 @@
                             <tbody>
                                 <tr>
                                     <td><%= aday_info.brans_txt %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Şehir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><%= aday_info.city %></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -142,7 +192,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><%= aday_info.cinsiyet %></td>
+                                    <td>
+                                        <%= aday_info.cinsiyet %>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -245,7 +297,7 @@
                 <div class="failed">
                     <h2 class="section-title">Aday Sonuçları</h2>
                     <div class="circ_chart">
-                        <!-- Progress circles will be appended here by JavaScript -->
+                       
                     </div>
                     <div class="failure-message">
                         <span class="failure-title">Test Başarısız</span>

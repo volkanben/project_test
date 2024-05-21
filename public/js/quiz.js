@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var gizliDiv1 = board.querySelector(".answer-radio-1");
         var hideDiv = board.querySelector(".answer-radio-2");
         
-        // ans1 ve ans2 null olmadığından emin olun
+
         
-            // Event listener'ları ekle
+          
             ans1.addEventListener("click", function() {
                 gizliDiv1.style.visibility = "visible";
                 hideDiv.style.visibility = "hidden";
@@ -32,15 +32,15 @@ document.addEventListener("DOMContentLoaded", function() {
         
         
 
-             // Tüm radio butonlarını seç
+     
              const radioButonlar = document.querySelectorAll('input[type="radio"]');
 
              
 
-             // Her bir radyo düğmesi için
+         
              radioButonlar.forEach(function(radio) {
                  radio.addEventListener('change', function() {
-                     // Radyo düğmesinin adından indeks değerini al
+                     // Radyo düğmesinin adından indeks değeri alınır
                      var index = radio.getAttribute('name').split('-').pop();
                      
                      // a ve b radyo düğmelerinin toplamı sekize eşit veya daha azsa
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
                              var nextFormId = '#form' + nextFormIndex;
                              var nextForm = document.querySelector(nextFormId);
                              if (nextForm) {
-                                const yOffset = -100; // 50 piksel yukarıda duracak şekilde ayarla
+                                const yOffset = -100; // 100 piksel yukarıda duracak şekilde ayarla
                                 const y = nextForm.getBoundingClientRect().top + window.pageYOffset + yOffset;
                                 window.scrollTo({ top: y, behavior: 'smooth' });
                             }

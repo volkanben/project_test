@@ -75,53 +75,64 @@ unread: unread
 
 router.post('/filter', async (req,res)=>{
   try{
-const date_filter = req.body.date;
-const brans_filter = req.body.brans;
-const aday_name = req.body.aday_name;
-console.log(req.body);
-let query_of_filter = `
-  SELECT a.kullanici_id, CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad, a.tel, a.email, a.cinsiyet, a.adres, a.dogum_tarihi, t.tarih, t.test_id, b.brans_txt
-  FROM aday a
-  JOIN test t ON a.kullanici_id = t.kullanici_id
-  JOIN branslar b ON a.brans = b.brans_id
-`;
-if (typeof aday_name !== 'undefined' && aday_name !== '') {
-  query_of_filter += ` WHERE CONCAT_WS(' ', ad, soyad) = '${aday_name}'`;
-}
+    const dateFilter = req.body.date;
+    const bransFilter = req.body.brans;
+    const cinsiyetFilter = req.body.cinsiyet;
+    const deneyimFilter = req.body.deneyim;
+    const adayName = req.body.aday_name;
 
-else{
-if (date_filter !== '' && brans_filter !== '') {
-  query_of_filter += ` WHERE `;
-  query_of_filter += `b.brans_id = '${brans_filter}'`;
+    console.log(req.body);
 
-  if (date_filter === '1') {
-    query_of_filter += ` ORDER BY t.tarih DESC`;
-  } else if (date_filter === '2') {
-    query_of_filter += ` ORDER BY t.tarih ASC`;
-  }
-} else if (brans_filter === '') {
-  if (date_filter === '1') {
-    query_of_filter += ` ORDER BY t.tarih DESC`;
-  } else if (date_filter === '2') {
-    query_of_filter += ` ORDER BY t.tarih ASC`;
-  }
-} else {
-  query_of_filter += ` WHERE b.brans_id = '${brans_filter}'`;
-}
-}
+    let query_of_filter = `
+    SELECT a.kullanici_id, CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad, a.tel, a.email, a.cinsiyet, a.adres, a.dogum_tarihi, t.tarih, t.test_id, b.brans_txt
+    FROM aday a
+    JOIN test t ON a.kullanici_id = t.kullanici_id
+    JOIN branslar b ON a.brans = b.brans_id
+    `;
 
-  
+    let whereClause = [];
 
-query_of_filter += ` LIMIT 1000;`;
+    if (adayName && adayName !== '') {
+        whereClause.push(`CONCAT_WS(' ', a.ad, a.soyad) LIKE '%${adayName}%'`);
+    } else {
+        if (bransFilter && bransFilter !== '') {
+            whereClause.push(`b.brans_id = '${bransFilter}'`);
+        }
 
-console.log('Oluşturulan sorgu:', query_of_filter);
+        if (cinsiyetFilter && cinsiyetFilter !== '') {
+            if (cinsiyetFilter === '1') {
+                whereClause.push(`a.cinsiyet = 'kadın'`);
+            } else if (cinsiyetFilter === '2') {
+                whereClause.push(`a.cinsiyet = 'erkek'`);
+            }
+        }
 
-res.redirect(`/filter?query=${encodeURIComponent(query_of_filter)}`);
+        if (deneyimFilter && deneyimFilter !== '') {
+            whereClause.push(`a.experiences = '${deneyimFilter}'`);
+        }
+    }
 
+    if (whereClause.length > 0) {
+        query_of_filter += ` WHERE ${whereClause.join(' AND ')}`;
+    }
+
+    if (dateFilter && dateFilter !== '') {
+        if (dateFilter === '1') {
+            query_of_filter += ` ORDER BY t.tarih DESC`;
+        } else if (dateFilter === '2') {
+            query_of_filter += ` ORDER BY t.tarih ASC`;
+        }
+    }
+
+    query_of_filter += ` LIMIT 1000;`;
+
+    console.log('Oluşturulan sorgu:', query_of_filter);
+
+    res.redirect(`/filter?query=${encodeURIComponent(query_of_filter)}`);
   }
   catch (error) {
     console.error('İşlem sırasında bir hata oluştu: ', error);
-    res.sendStatus(500); // Sunucu hatası durum kodu gönder
+    res.sendStatus(500); 
 }
 });
 
@@ -165,11 +176,11 @@ router.post('/password', async (req, res) => {
   try {
     const { username, old_password, new_password } = req.body;
 
-    // Kullanıcı adı ve eski şifreyle kullanıcı sorgusu yapılır
+   
     const query_ques = `SELECT * FROM kurum WHERE username=? AND password=?`;
     const [count_ques] = await db.execute(query_ques, [username, old_password]);
 
-    // Eğer kullanıcı varsa, yeni şifre ile güncelleme işlemi yapılır
+   
     if (count_ques.length > 0) {
       const query_update_password = `UPDATE kurum SET password=? WHERE username=? AND password=?`;
       await db.execute(query_update_password, [new_password, username, old_password]);
@@ -178,7 +189,7 @@ router.post('/password', async (req, res) => {
       return res.status(400).send("<b>Kullanıcı adı veya eski şifre yanlış.</b>");
     }
 
-    // Şifre değiştirme sayfasına yönlendirilir
+  
     res.redirect('/test2');
   } catch (error) {
     console.error(error);
@@ -198,7 +209,7 @@ router.get('/test2', async (req, res) => {
     FROM aday a
     JOIN test t ON a.kullanici_id = t.kullanici_id
     join branslar b on a.brans = b.brans_id 
-    ORDER BY t.tarih ASC
+    ORDER BY t.tarih Desc
     LIMIT 0, 1000;
     `;
 
@@ -207,7 +218,7 @@ router.get('/test2', async (req, res) => {
    
 const [rows, fields] = await db.execute(get_query);
 
-// rows içindeki verileri kullanarak HTML şablonunu oluşturabilirsiniz
+
 const adaylar = rows.map(row => {
     const formattedDate = new Date(row.tarih).toLocaleDateString('tr-TR');
 
@@ -264,17 +275,20 @@ router.get('/test/:id', async (req,res)=>{
     try{
         const test_id = req.params.id;
         const get_query=`
-        SELECT a.kullanici_id, CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad ,b.brans_txt, a.tel, a.email, a.cinsiyet, a.adres, a.dogum_tarihi, t.tarih 
-        FROM aday a
-        JOIN test t ON a.kullanici_id = t.kullanici_id 
-        JOIN branslar b ON a.brans=b.brans_id
-        WHERE t.kullanici_id =?`;
+        SELECT a.kullanici_id, CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad, b.brans_txt, a.tel, a.email, a.cinsiyet, a.experiences, s.city, a.adres, a.dogum_tarihi, t.tarih
+FROM aday a
+JOIN test t ON a.kullanici_id = t.kullanici_id
+JOIN branslar b ON a.brans = b.brans_id
+JOIN sehirler s ON a.city = s.city_id
+WHERE t.kullanici_id = ?
+`;
       
-        const read_message=``
+   
         
         const [rows,fields] = await db.execute(get_query,[test_id]);
         
         const yas_value = rows[0].dogum_tarihi;
+
 
 
         const current_date = new Date();
@@ -292,8 +306,7 @@ router.get('/test/:id', async (req,res)=>{
 
         await db.execute(query_read,[test_id]);
 
-
-        // Öğretmen tipi paun toplamları tanımlama
+      
         var planli = 0;
         var spontan = 0;
         var bagimsiz = 0;
@@ -507,23 +520,22 @@ router.get('/test/:id', async (req,res)=>{
             if (types.hasOwnProperty(key)) {
               var currentValue = types[key];
               var smallestValue = Infinity;
-              var smallestKeys = []; // Eşit olan diğer anahtarları saklamak için bir dizi oluşturuyoruz.
+              var smallestKeys = [];
               
               for (var subKey in currentValue) {
                 if (currentValue.hasOwnProperty(subKey)) {
-                  if (currentValue[subKey] <= smallestValue) { // Küçük veya eşit olanları kontrol ediyoruz.
-                    if (currentValue[subKey] < smallestValue) { // Eğer küçükse, en küçük değeri güncelliyoruz.
+                  if (currentValue[subKey] <= smallestValue) {
+                    if (currentValue[subKey] < smallestValue) {
                       smallestValue = currentValue[subKey];
-                      smallestKeys = []; // Eşit olan anahtarları temizliyoruz.
+                      smallestKeys = []; 
                     }
                     smallestKeys.push(subKey); // Anahtarı eşit olanlar dizisine ekliyoruz.
                   }
                 }
               }
           
-              // En küçük değere sahip anahtarları silme işlemi
-              if (smallestKeys.length === Object.keys(currentValue).length) { // Eğer en küçük anahtar sayısı, tüm anahtar sayısına eşitse, hiçbir anahtar silinmez.
-                continue;
+            
+              if (smallestKeys.length === Object.keys(currentValue).length) { 
               }
           
               smallestKeys.forEach(function(sKey) {
@@ -552,8 +564,7 @@ router.get('/test/:id', async (req,res)=>{
             4.5: 90,
             5: 100
         };
-        
-        // Değerlerin dönüştürülmesi
+      
         result.forEach(function(item) {
             Object.keys(item).forEach(function(key) {
                 let value = item[key];
@@ -564,7 +575,7 @@ router.get('/test/:id', async (req,res)=>{
                 }
             });
         });
-       
+        console.log(rows[0]);
     console.log(types);
         res.render('rapor', {
            aday_info:rows[0],
@@ -574,7 +585,7 @@ router.get('/test/:id', async (req,res)=>{
 
 
 
-console.log(result); // Sonucu görüntüle
+console.log(result); 
 
        
     }
@@ -592,7 +603,7 @@ router.get('/test',async (req,res)=>{
             
             const get_query = `
             
-            SELECT a.kullanici_id,CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad , a.tel, a.email, a.cinsiyet, a.adres, a.dogum_tarihi,t.tarih,t.test_id,b.brans_txt
+            SELECT a.kullanici_id,CONCAT(a.ad, ' ', a.soyad) AS Ad_Soyad , a.tel, a.email, a.cinsiyet, a.experiences, a.city, a.adres, a.dogum_tarihi,t.tarih,t.test_id,b.brans_txt
             FROM aday a
             JOIN test t ON a.kullanici_id = t.kullanici_id
             join branslar b on a.brans = b.brans_id 
@@ -602,7 +613,7 @@ router.get('/test',async (req,res)=>{
            
             const [rows, fields] = await db.execute(get_query);
     
-            // rows içindeki verileri kullanarak HTML şablonunu oluşturabilirsiniz
+          
             const adaylar = rows.map(row => ({
                id:row.kullanici_id,
                ad: row.Ad_Soyad,
@@ -610,6 +621,8 @@ router.get('/test',async (req,res)=>{
                tel: row.tel,
                mail: row.email,
                cinsiyet: row.cinsiyet,
+               city:row.city,
+               deneyim:row.experiences,
                adres: row.adres,
                dogum: row.dogum_tarihi,
                tarih: row.tarih,
@@ -656,10 +669,10 @@ router.get('/test',async (req,res)=>{
   
               const kullanici_id = generateSessionID();
               const inf_form = req.body;
-              const { ad, soyad, brans, phone, email, gender, address, birthday } = inf_form;
+              const { ad, soyad, brans, phone, email, gender,city, experiences, address, birthday } = inf_form;
   
-              const info_query = `INSERT INTO aday (kullanici_id, ad, soyad, brans, tel, email, cinsiyet, adres, dogum_tarihi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-              const values = [kullanici_id, ad, soyad, brans, phone, email, gender, address, birthday];
+              const info_query = `INSERT INTO aday (kullanici_id, ad, soyad, brans, tel, email, cinsiyet, city , experiences, adres, dogum_tarihi) VALUES (?, ? , ?, ?, ? , ?, ?, ?, ?, ?, ?);`;
+              const values = [kullanici_id, ad, soyad, brans, phone, email, gender, city , experiences, address, birthday];
               
               const test_info_query = `INSERT INTO test (kullanici_id, kurum_id, tarih) VALUES (?, ?, ?)`;
               const value_test = [kullanici_id, 1, new Date()];
@@ -676,6 +689,62 @@ router.get('/test',async (req,res)=>{
               res.status(500).json({ error: 'Bir hata oluştu, lütfen tekrar deneyin.' });
           }
       }
+});
+
+router.get('/analiz',async (req,res)=>{
+
+  try{
+    const mf_percent_query = `SELECT 
+    SUM(CASE WHEN cinsiyet = 'kadın' THEN 1 ELSE 0 END) AS kadın_sayısı,
+    SUM(CASE WHEN cinsiyet = 'erkek' THEN 1 ELSE 0 END) AS erkek_sayısı,
+    COUNT(*) AS toplam,
+    (SUM(CASE WHEN cinsiyet = 'kadın' THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS kadın_oranı,
+    (SUM(CASE WHEN cinsiyet = 'erkek' THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS erkek_oranı
+    FROM aday;`
+
+    const [inf, field] = await db.execute(mf_percent_query);
+
+    const brans_percent_query = `
+    SELECT 
+    b.brans_txt,
+    COUNT(*) AS brans_sayisi,
+    (COUNT(*) / (SELECT COUNT(*) FROM aday)) * 100 AS brans_orani
+    FROM aday a
+    JOIN branslar b ON a.brans = b.brans_id
+    GROUP BY b.brans_txt;` ; 
+
+    const [bra,field1] = await db.execute(brans_percent_query);
+
+    const deneyim_percent_query = `
+    SELECT 
+    CASE 
+        WHEN a.experiences = '0' THEN '0'
+        WHEN a.experiences = '1' THEN '1-3'
+        WHEN a.experiences = '2' THEN '4-6'
+        WHEN a.experiences = '3' THEN '7-9'
+        WHEN a.experiences = '4' THEN '11-13'
+        WHEN a.experiences = '5' THEN '14+'
+    END AS deneyim_seviyesi,
+    COUNT(*) AS deneyim_sayisi,
+    (COUNT(*) / (SELECT COUNT(*) FROM aday)) * 100 AS deneyim_orani
+FROM aday a
+GROUP BY deneyim_seviyesi;
+    `;
+
+    const [exp,field2] = await db.execute(deneyim_percent_query);
+
+
+    res.render('analiz',{
+    cinsiyet:inf[0],
+    branslar:bra[0],
+    deneyim:exp[0]
+    }
+    );
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+}
 });
   
  
